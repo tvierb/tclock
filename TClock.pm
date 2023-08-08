@@ -43,8 +43,8 @@ sub draw
 
 	my $ms = $m + ($s / 60);
 	my $mangle = $ms * 2 * 3.14159265 / 60;
-	$self->draw_hand( $self->{ maxlen } - 2, $mangle, "M" );
-	$self->draw_point( $self->{ cx }, $self->{ cy }, " ");
+	$self->draw_hand( $self->{ maxlen } - 1, $mangle, "M" );
+	$self->draw_point( 1, 1, " ");
 }
 
 sub draw_point
