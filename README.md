@@ -43,3 +43,7 @@ The hands are updated every 5 seconds which probably is to often: I see a flicke
 * (24 hour mode)
 * different clock faces
 
+## Other
+
+A great extensive list of terminal codes can be found at https://www-user.tu-chemnitz.de/~heha/hsn/terminal/terminal.htm on the time of writing this line.
+
