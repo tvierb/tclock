@@ -80,7 +80,7 @@ sub draw_clockface
 sub draw_hand
 {
 	my ($self, $len, $angle, $dot) = @_;
-	for (my $i = 0; $i <= $len; $i++)
+	for (my $i = 0; $i <= $len; $i += 0.2)
 	{
 		my $x = cos( $angle + ( 3 * 3.14159265 / 2 ) ) * $i;
 		my $y = sin( $angle + ( 3 * 3.14159265 / 2 ) ) * $i;
