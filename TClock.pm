@@ -63,7 +63,11 @@ sub draw_clockface
 		my $dotx = cos( $angle ) * $self->{ maxlen };
 		my $doty = sin( $angle ) * $self->{ maxlen };
 		my $dot = ".";
-		$dot = $minute / 5 unless $minute % 5;
+		unless ($minute % 5)
+		{
+			$dot = $minute / 5;
+			$dot ||= 12;
+		}
 		$self->draw_point(
 			$self->{ cx } + ( 2.2 * $dotx ),
 			$self->{ cy } + $doty,
