@@ -8,7 +8,9 @@ use Math::Round;
 sub new
 {
 	my $class = shift;
+	my %params = @_;
 	my $self = bless({}, $class);
+	$self->{ stretch } = $params{"stretch"} // 2.2;
 	$self->update();
 	return $self;
 }
@@ -69,7 +71,7 @@ sub draw_clockface
 			$dot ||= 12;
 		}
 		$self->draw_point(
-			$self->{ cx } + ( 2.2 * $dotx ),
+			$self->{ cx } + ( $self->{ stretch } * $dotx ),
 			$self->{ cy } + $doty,
 			$dot );
 	}
@@ -83,11 +85,10 @@ sub draw_hand
 		my $x = cos( $angle + ( 3 * 3.14159265 / 2 ) ) * $i;
 		my $y = sin( $angle + ( 3 * 3.14159265 / 2 ) ) * $i;
 		$self->draw_point(
-			$self->{ cx } + ( 2.2 * $x ), # strech it!
+			$self->{ cx } + ( $self->{ stretch } * $x ), # stretch it!
 			$self->{ cy } + $y,
 			$dot );
 	}
 }
-
 
 1;
