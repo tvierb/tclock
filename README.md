@@ -4,7 +4,7 @@ This clock is heavily inspired by the famous awk terminal clock by Antoni Sawick
 
 But I did it in Perl (18:39):
 
-                                  . .  0  . .
+                                  . .  12  . .
                             .  .               .  .
                        .  11                        1  .
                      .                                   .
