@@ -3,6 +3,7 @@
 This clock is heavily inspired by the famous awk terminal clock by Antoni Sawicki --> https://github.com/tenox7/aclock/blob/master/sources/aclock.awk
 
 But I did it in Perl (18:39):
+
                                   . .  0  . .
                             .  .               .  .
                        .  11                        1  .
