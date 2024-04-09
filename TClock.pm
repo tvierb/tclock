@@ -20,7 +20,8 @@ sub new
 sub set_mode
 {
 	my $self = shift;
-	my $mode = shift // "standard12";
+	my $mode = shift;
+	$mode //= "standard12";
 	if ($mode eq "standard12")
 	{
 		$self->set_standardclock();
@@ -47,6 +48,7 @@ sub set_standardclock
 	$self->{ seconds_per_minute } = 60;
 	$self->{ seconds_factor } = 1;
 	$self->{ mode } = "standard12";
+	
 }
 
 sub set_24_hour_clock
@@ -67,7 +69,7 @@ sub set_decimal_time
 	$self->{ wrap_hours }         = 10;
 	$self->{ minutes_per_hour }   = 100;
 	$self->{ seconds_per_minute } = 100;
-	$self->{ seconds_factor } = 1/0.864;
+	$self->{ seconds_factor } = 1.0/0.864;
 	$self->{ mode } = "decimal-time";
 }
 
@@ -75,12 +77,9 @@ sub update
 {
 	my $self = shift;
 	# calculate the ticks:
-	my $hour_ticks = $self->{minutes_per_hour} * $self->{seconds_per_minute};
 	my ($h, $m, $s) = split(/ /, strftime("%H %M %S", localtime()));
-	my $hh = $h % $self->{ wrap_hours };
-	my $ticks = ($hh * $hour_ticks) + ($m * $self->{ seconds_per_minute }) + $s;
-	$ticks *= $self->{ seconds_factor }; # decimal time has shorter seconds
-	$self->{ ticks } = $ticks;
+	$self->{ticks} = $self->{ seconds_factor } * (($h * 3600) + ($m * 60) + $s); # converting standard time
+	# $ticks *= $self->{ seconds_factor }; # decimal time has shorter seconds
 	$self->{ time  } = [ $h, $m, $s ];
 
 	$self->{ lines } = `tput lines`;
@@ -102,6 +101,7 @@ sub draw
 	if ($self->{mode} eq "decimal-time")
 	{
 		my $text = "";
+		$text .= "ticks=" . $self->{ticks} . " ";
 		$text .= sprintf("%.4f", $self->{ ticks } / ($self->{ seconds_per_minute } * $self->{ minutes_per_hour }));
 		$text .= sprintf(" aka %2d:%2d:%2d", $self->{ time }->[0], $self->{ time }->[1], $self->{ time }->[2]);
 		print $text;

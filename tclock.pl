@@ -26,15 +26,7 @@ $stretch //= 2.2;
 $stretch += 0;
 $delay //= 15;
 
-my $tc = TClock->new( stretch => $stretch );
-if ($mode eq "standard24")
-{
-	$tc->set_24_hour_clock();
-}
-elsif ($mode eq "decimal-time")
-{
-	$tc->set_decimal_time();
-}
+my $tc = TClock->new( stretch => $stretch, mode => $mode );
 
 while(4e4)
 {
